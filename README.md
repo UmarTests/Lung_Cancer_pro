@@ -64,8 +64,7 @@ Develop an **interpretable ML model** with:
 
 ## ⚙️ Section 3: Design / Workflow
 
-```
-
+```mermaid
 flowchart TD
     A[Data Loading] --> B[Cleaning: Missing Values/Duplicates]
     B --> C[EDA: Survival Rate Analysis]
@@ -74,45 +73,6 @@ flowchart TD
     E --> F[Model Training: XGBoost vs LightGBM]
     F --> G[Threshold Optimization: PR Curve]
     G --> H[Streamlit Deployment]
-### 🔧 Key Design Decisions
-
-#### 📌 Feature Selection:
-- Retained features with **SHAP importance > 0.05**
-- Dropped **ID** and redundant **date** columns
-
-#### ⚖️ Class Imbalance Handling:
-- Used `scale_pos_weight=4.0` in **XGBoost**
-- Evaluated using **Average Precision (AP) score** rather than standard accuracy
-
-#### 🖥️ Deployment:
-- Minimal UI with **6 inputs** (age, BMI, treatment type, etc.)
-- Real-time **feature calculation** (e.g., `bmi × cholesterol`)
-
----
-
-## 📈 Section 4: Results
-
-### 📊 Model Performance:
-
-| Metric                | XGBoost | LightGBM |
-|-----------------------|---------|----------|
-| **AP Score**          | 0.32    | 0.29     |
-| **ROC-AUC**           | 0.68    | 0.65     |
-| **Recall (Survived)** | 0.96    | 0.94     |
-
----
-
-### 🖼️ Visualizations:
-
-- **Confusion Matrix**  
-  _Example:_  
-  `![Confusion Matrix](images/conf_matrix.png)`
-
-- **Feature Importance (SHAP values)**  
-  _Example:_  
-  `![SHAP Plot](images/shap_plot.png)`
-
----
 
 ### 💡 Key Insights:
 - Top predictive features: `treatment_score`, `bmi_cholesterol_interaction`
