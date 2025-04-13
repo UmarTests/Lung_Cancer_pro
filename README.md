@@ -74,3 +74,76 @@ flowchart TD
     E --> F[Model Training: XGBoost vs LightGBM]
     F --> G[Threshold Optimization: PR Curve]
     G --> H[Streamlit Deployment]
+### Key Design Decisions:
+
+1. **Feature Selection:**
+   - Retained features with SHAP importance > 0.05  
+   - Dropped ID and redundant date columns  
+
+2. **Class Imbalance Handling:**
+   - Used `scale_pos_weight=4.0` in XGBoost  
+   - Evaluated using AP score instead of accuracy  
+
+3. **Deployment:**
+   - Minimal UI with 6 inputs (age, BMI, treatment type, etc.)  
+   - Real-time feature calculation (e.g., `bmi × cholesterol`)  
+
+---
+
+## 📈 Section 4: Results
+
+### Model Performance:
+
+| Metric             | XGBoost | LightGBM |
+|--------------------|---------|----------|
+| **AP Score**       | 0.32    | 0.29     |
+| **ROC-AUC**        | 0.68    | 0.65     |
+| **Recall (Survived)** | 0.96    | 0.94     |
+
+### Visualizations:
+
+1. **Confusion Matrix**  
+*(Insert confusion matrix image here)*  
+
+2. **Feature Importance (SHAP values)**  
+*(Insert SHAP plot image here)*  
+
+### Key Insights:
+- **Top predictive features**: `treatment_score`, `bmi_cholesterol_interaction`  
+- Model tends to **over-predict survival** (high recall, lower precision)  
+- **Surgery** increases survival odds by **2.1×** compared to radiation (SHAP values)  
+
+---
+
+## ✅ Section 5: Conclusion
+
+### Achievements:
+- Delivered a model with **AP score 0.32** (28% better than baseline)  
+- Deployed an interactive prediction tool with **85ms latency**
+
+### Challenges:
+- Required manual feature engineering for clinical interpretability  
+- Trade-off between **recall (96%)** and **precision (22%)**
+
+### Future Work:
+1. Integrate **genomic markers** for precision medicine  
+2. Develop **clinician feedback loop** for model refinement  
+
+### Learnings:
+- Domain knowledge (e.g., cancer staging) was crucial for effective feature engineering  
+- **Time-based splits** outperformed random splits in clinical settings  
+
+---
+
+## 🏷️ GitHub Badges
+
+*(Optional: Add Streamlit, Python, XGBoost badges here if needed)*
+
+---
+
+## 🛠️ How to Run
+
+```bash
+pip install -r requirements.txt  # xgboost>=1.6, streamlit>=1.12
+streamlit run app.py
+
