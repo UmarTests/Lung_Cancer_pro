@@ -73,6 +73,33 @@ flowchart TD
     E --> F[Model Training: XGBoost vs LightGBM]
     F --> G[Threshold Optimization: PR Curve]
     G --> H[Streamlit Deployment]
+```
+### 💡 Key Insights:
+- Top predictive features: `treatment_score`, `bmi_cholesterol_interaction`
+- Model tends to **over-predict survival** (high recall, lower precision)
+- **Surgery increases survival odds by 2.1×** compared to radiation (per SHAP analysis)
+
+---
+
+## 📈 Section 4: Results
+
+### 📊 Model Performance:
+
+| Metric               | XGBoost | LightGBM |
+|----------------------|---------|----------|
+| AP Score             | 0.32    | 0.29     |
+| ROC-AUC              | 0.68    | 0.65     |
+| Recall (Survived)    | 0.96    | 0.94     |
+
+### 🖼️ Visualizations:
+
+**Confusion Matrix**  
+Example:  
+![Confusion Matrix](images/conf_matrix.png)
+
+**Feature Importance (SHAP values)**  
+Example:  
+![SHAP Plot](images/shap_plot.png)
 
 ### 💡 Key Insights:
 - Top predictive features: `treatment_score`, `bmi_cholesterol_interaction`
